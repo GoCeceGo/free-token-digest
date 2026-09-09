@@ -2,8 +2,8 @@ name: Daily Free Token Digest
 
 on:
   schedule:
-    # 每天北京时间上午 9:00 运行
-    - cron: '0 9 * * *'
+    # GitHub Actions cron 使用 UTC；01:00 UTC = 北京时间 09:00
+    - cron: '0 1 * * *'
   workflow_dispatch: # 允许手动触发
 
 jobs:
@@ -24,24 +24,14 @@ jobs:
 
       - name: Get date
         id: date
-        run: echo "date=$(date '+%Y年%m月%d日')" >> $GITHUB_OUTPUT
+        run: echo "date=$(TZ='Asia/Shanghai' date '+%Y年%m月%d日')" >> $GITHUB_OUTPUT
 
       - name: Fetch free token info
         run: python fetch_free_tokens.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Read email HTML
-        id: read_email
-        run: |
-          {
-            echo 'content<<EOF'
-            cat email_body.html
-            echo 'EOF'
-          } >> $GITHUB_OUTPUT
-
       - name: Send email digest
-        if: always()
         uses: dawidd6/action-send-mail@v3
         with:
           from: ${{ secrets.SMTP_USERNAME }}
@@ -51,5 +41,5 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: Free Token Digest - ${{ steps.date.outputs.date }}
-          html_body: ${{ steps.read_email.outputs.content }}
+          html_body: file://email_body.html
           to: ${{ secrets.RECIPIENT_EMAIL }}
