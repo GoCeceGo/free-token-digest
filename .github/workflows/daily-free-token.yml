@@ -22,6 +22,10 @@ jobs:
         run: |
           pip install requests beautifulsoup4 lxml
 
+      - name: Get date
+        id: date
+        run: echo "date=$(date '+%Y年%m月%d日')" >> $GITHUB_OUTPUT
+
       - name: Fetch free token info
         run: python fetch_free_tokens.py
         env:
@@ -38,6 +42,5 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: Free Token Digest - ${{ steps.date.outputs.date }}
-          body: email_body.html
-          html: true
+          html_body: file:email_body.html
           to: ${{ secrets.RECIPIENT_EMAIL }}
