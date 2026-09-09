@@ -12,11 +12,18 @@ import requests
 SOURCE_REPO = "mnfst/awesome-free-llm-apis"
 SOURCE_URL = f"https://github.com/{SOURCE_REPO}"
 
+# 前四个是优先关注模型，后面是其他知名模型
 TARGET_MODELS = {
     "Kimi": ["kimi", "月之暗面", "moonshot"],
     "GLM": ["glm", "智谱", "chatglm", "zhipu", "bigmodel"],
     "DeepSeek": ["deepseek", "深度求索"],
     "Qwen": ["qwen", "通义", "tongyi", "alibaba"],
+    "GPT / OpenAI": ["gpt", "openai"],
+    "Gemini": ["gemini"],
+    "Llama": ["llama"],
+    "Mistral": ["mistral", "ministral", "codestral"],
+    "Gemma": ["gemma"],
+    "Claude": ["claude", "anthropic"],
 }
 
 
@@ -154,7 +161,7 @@ def render_email(links: Dict[str, List[Platform]]) -> str:
 </head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; max-width: 680px; margin: 0 auto; padding: 24px; background: #ffffff; color: #1f2937;">
     <h1 style="margin: 0; font-size: 24px; color: #4338ca;">每日免费 Token 额度入口</h1>
-    <p style="margin: 8px 0 20px 0; font-size: 13px; color: #6b7280;">{date_text} · Kimi / GLM / DeepSeek / Qwen</p>
+    <p style="margin: 8px 0 20px 0; font-size: 13px; color: #6b7280;">{date_text} · Kimi · GLM · DeepSeek · Qwen 及其他知名模型</p>
 
     <p style="margin: 0 0 8px 0; font-size: 14px; color: #374151;">
         下面每个链接都指向包含对应模型免费额度说明的平台。点平台名称可查看额度说明；点右侧链接可申请 Key。
