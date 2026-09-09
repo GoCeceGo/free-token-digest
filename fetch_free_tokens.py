@@ -5,8 +5,6 @@ import html
 import re
 from datetime import datetime
 from typing import Dict, List, NamedTuple
-from urllib.parse import quote
-
 import requests
 
 SOURCE_REPO = "mnfst/awesome-free-llm-apis"
@@ -30,7 +28,6 @@ TARGET_MODELS = {
 class Platform(NamedTuple):
     name: str
     key_url: str
-    source_url: str
 
 
 def fetch_github_readme(repo: str) -> str:
@@ -48,14 +45,6 @@ def fetch_github_readme(repo: str) -> str:
         except requests.RequestException as error:
             print(f"获取 {url} 失败：{error}")
     return ""
-
-
-def github_anchor(title: str) -> str:
-    """近似生成 GitHub Markdown 标题锚点。"""
-    slug = title.strip().lower()
-    slug = re.sub(r"[^\w\u4e00-\u9fff\s-]", "", slug)
-    slug = re.sub(r"\s+", "-", slug.strip())
-    return quote(slug)
 
 
 def parse_platform_sections(readme: str) -> List[Dict[str, str]]:
@@ -97,8 +86,6 @@ def collect_platform_links(readme: str) -> Dict[str, List[Platform]]:
 
     for section in parse_platform_sections(readme):
         platform_name = section["title"]
-        source_url = f"{SOURCE_URL}#{github_anchor(platform_name)}"
-
         for model_name, keywords in TARGET_MODELS.items():
             matched = False
             for line in section["body"].splitlines():
@@ -116,7 +103,7 @@ def collect_platform_links(readme: str) -> Dict[str, List[Platform]]:
 
             if matched and platform_name not in seen[model_name]:
                 links[model_name].append(
-                    Platform(platform_name, section["url"], source_url)
+                    Platform(platform_name, section["url"])
                 )
                 seen[model_name].add(platform_name)
 
@@ -133,7 +120,7 @@ def render_email(links: Dict[str, List[Platform]]) -> str:
             items = "".join(
                 f"""
                 <li style="margin: 8px 0;">
-                    <a href="{html.escape(platform.source_url)}" style="color: #4338ca; font-weight: 600;">{html.escape(platform.name)}</a>
+                    <span style="color: #4338ca; font-weight: 600;">{html.escape(platform.name)}</span>
                     <span style="color: #9ca3af;">·</span>
                     <a href="{html.escape(platform.key_url)}" style="color: #6366f1;">获取 API Key</a>
                 </li>"""
@@ -164,7 +151,7 @@ def render_email(links: Dict[str, List[Platform]]) -> str:
     <p style="margin: 8px 0 20px 0; font-size: 13px; color: #6b7280;">{date_text} · Kimi · GLM · DeepSeek · Qwen 及其他知名模型</p>
 
     <p style="margin: 0 0 8px 0; font-size: 14px; color: #374151;">
-        下面每个链接都指向包含对应模型免费额度说明的平台。点平台名称可查看额度说明；点右侧链接可申请 Key。
+        以下为按模型汇总的免费额度相关平台。平台名称仅作展示；如需了解额度详情，请通过右侧“获取 API Key”访问平台官网，或自行访问平台官网查询。
     </p>
 
     {''.join(cards)}
