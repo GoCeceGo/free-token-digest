@@ -51,3 +51,16 @@ workflow 页面 → 点击 **Run workflow** 按钮，立即测试一次。
 ## License
 
 MIT
+### 2. 配置 Secrets
+
+进入仓库 → **Settings** → 左侧滚动到底部找到 **Secrets and variables** → 点 **Actions** → **New repository secret**，添加三个密钥：
+
+| Secret 名称 | 说明 | 获取方式 |
+|---|---|---|
+| `SMTP_USERNAME` | 发件邮箱 | 你的 QQ 邮箱地址 |
+| `SMTP_PASSWORD` | 邮箱授权码 | QQ 邮箱设置 → 账户 → SMTP 服务 → 生成授权码 |
+| `RECIPIENT_EMAIL` | 收件邮箱 | 可以和发件人相同 |
+
+> ⚠️ **QQ 邮箱注意**：密码框填的是**授权码**，不是登录密码！需要先在 QQ 邮箱里开启 SMTP 服务并生成授权码。
+
+> 📍 **找不到 Secrets 入口？** 确保你是在**仓库**的 Settings 里（不是 GitHub 账号设置），左侧侧边栏往下滚动，看到 **Secrets and variables** 分类，点进去就有 **Actions** 标签。

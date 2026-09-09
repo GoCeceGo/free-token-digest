@@ -2,13 +2,9 @@ name: Daily Free Token Digest
 
 on:
   schedule:
-    # 每天北京时间上午 9:00 运行 (UTC 1:00)
+    # 每天北京时间上午 9:00 运行
     - cron: '0 9 * * *'
   workflow_dispatch: # 允许手动触发
-    inputs:
-      test_email:
-        description: 'Test email address'
-        required: false
 
 jobs:
   fetch-and-notify:
@@ -35,11 +31,25 @@ jobs:
         if: always()
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.gmail.com
-          server_port: 587
+          server_address: ${{ contains(secrets.SMTP_USERNAME, '@qq.com') && 'smtp.qq.com' || 'smtp.163.com' }}
+          server_port: 465
+          secure: true
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: Free Token Digest - ${{ steps.date.outputs.date }}
           body: email_body.html
           content_type: text/html
+          to: ${{ secrets.RECIPIENT_EMAIL }}
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          from: ${{ secrets.SMTP_USERNAME }}
+          server_address: ${{ contains(secrets.SMTP_USERNAME, '@qq.com') && 'smtp.qq.com' || 'smtp.163.com' }}
+          server_port: 465
+          secure: true
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: Free Token Digest - ${{ steps.date.outputs.date }}
+          body: email_body.html
+          html: true
           to: ${{ secrets.RECIPIENT_EMAIL }}
