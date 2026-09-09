@@ -1,0 +1,45 @@
+name: Daily Free Token Digest
+
+on:
+  schedule:
+    # 每天北京时间上午 9:00 运行 (UTC 1:00)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # 允许手动触发
+    inputs:
+      test_email:
+        description: 'Test email address'
+        required: false
+
+jobs:
+  fetch-and-notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 lxml
+
+      - name: Fetch free token info
+        run: python fetch_free_tokens.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Send email digest
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: Free Token Digest - ${{ steps.date.outputs.date }}
+          body: email_body.html
+          content_type: text/html
+          to: ${{ secrets.RECIPIENT_EMAIL }}
