@@ -31,6 +31,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Read email HTML
+        id: read_email
+        run: |
+          {
+            echo 'content<<EOF'
+            cat email_body.html
+            echo 'EOF'
+          } >> $GITHUB_OUTPUT
+
       - name: Send email digest
         if: always()
         uses: dawidd6/action-send-mail@v3
@@ -42,5 +51,5 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: Free Token Digest - ${{ steps.date.outputs.date }}
-          html_body: file:email_body.html
+          html_body: ${{ steps.read_email.outputs.content }}
           to: ${{ secrets.RECIPIENT_EMAIL }}
