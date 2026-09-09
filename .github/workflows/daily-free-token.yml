@@ -31,18 +31,6 @@ jobs:
         if: always()
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: ${{ contains(secrets.SMTP_USERNAME, '@qq.com') && 'smtp.qq.com' || 'smtp.163.com' }}
-          server_port: 465
-          secure: true
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
-          subject: Free Token Digest - ${{ steps.date.outputs.date }}
-          body: email_body.html
-          content_type: text/html
-          to: ${{ secrets.RECIPIENT_EMAIL }}
-        if: always()
-        uses: dawidd6/action-send-mail@v3
-        with:
           from: ${{ secrets.SMTP_USERNAME }}
           server_address: ${{ contains(secrets.SMTP_USERNAME, '@qq.com') && 'smtp.qq.com' || 'smtp.163.com' }}
           server_port: 465
