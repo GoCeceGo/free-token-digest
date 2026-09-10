@@ -1,0 +1,697 @@
+{
+  "generated_at": "2026-09-10T03:44:42.480957+00:00",
+  "models": {
+    "Claude": [
+      {
+        "key_url": "https://console.anthropic.com/",
+        "model": "Claude",
+        "name": "Anthropic",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://unify.ai/",
+        "model": "Claude",
+        "name": "Unify",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      }
+    ],
+    "DeepSeek": [
+      {
+        "key_url": "https://www.aionlabs.ai/docs/rate-limits/",
+        "model": "DeepSeek",
+        "name": "AionLabs",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
+        "model": "DeepSeek",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai",
+        "model": "DeepSeek",
+        "name": "Cloudflare Workers AI",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models#rate-limits",
+        "model": "DeepSeek",
+        "name": "Github",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://modelscope.cn/docs/model-service/API-Inference/limits",
+        "model": "DeepSeek",
+        "name": "ModelScope(魔搭社区）(仅限cn/only cn）",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://build.nvidia.com/explore/discover",
+        "model": "DeepSeek",
+        "name": "Nvidia",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://ollama.com/cloud",
+        "model": "DeepSeek",
+        "name": "Ollama",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://ollama.com/settings/keys",
+        "model": "DeepSeek",
+        "name": "Ollama Cloud",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits#free-tier",
+        "model": "DeepSeek",
+        "name": "SambaNova",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://www.volcengine.com/docs/84458/1585102",
+        "model": "DeepSeek",
+        "name": "Volcengine 火山引擎(平台） （500 point 资源点/day）",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      }
+    ],
+    "GLM": [
+      {
+        "key_url": "https://www.aionlabs.ai/docs/rate-limits/",
+        "model": "GLM",
+        "name": "AionLabs",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
+        "model": "GLM",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://build.nvidia.com/explore/discover",
+        "model": "GLM",
+        "name": "Nvidia",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://ollama.com/cloud",
+        "model": "GLM",
+        "name": "Ollama",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://open.bigmodel.cn/usercenter/apikeys",
+        "model": "GLM",
+        "name": "Z AI (Zhipu AI)",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://docs.z.ai/guides/overview/pricing",
+        "model": "GLM",
+        "name": "Z.ai (GLM-4.5/4.7-Flash)",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      }
+    ],
+    "GPT / OpenAI": [
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
+        "model": "GPT / OpenAI",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://console.groq.com/docs/rate-limits",
+        "model": "GPT / OpenAI",
+        "name": "Groq",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://console.groq.com/keys",
+        "model": "GPT / OpenAI",
+        "name": "Groq",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://token.llm7.io",
+        "model": "GPT / OpenAI",
+        "name": "LLM7.io",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://build.nvidia.com/explore/discover",
+        "model": "GPT / OpenAI",
+        "name": "Nvidia",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://ollama.com/cloud",
+        "model": "GPT / OpenAI",
+        "name": "Ollama",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://openrouter.ai/keys",
+        "model": "GPT / OpenAI",
+        "name": "OpenRouter",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits#free-tier",
+        "model": "GPT / OpenAI",
+        "name": "SambaNova",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://unify.ai/",
+        "model": "GPT / OpenAI",
+        "name": "Unify",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      }
+    ],
+    "Gemini": [
+      {
+        "key_url": "https://aistudio.google.com",
+        "model": "Gemini",
+        "name": "Google AI Studio",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://aistudio.google.com/app/apikey",
+        "model": "Gemini",
+        "name": "Google Gemini",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://ai.google.dev/gemini-api/docs/rate-limits#free-tier",
+        "model": "Gemini",
+        "name": "Google Gemini Google/Gemma 4",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://unify.ai/",
+        "model": "Gemini",
+        "name": "Unify",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      }
+    ],
+    "Gemma": [
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
+        "model": "Gemma",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai",
+        "model": "Gemma",
+        "name": "Cloudflare Workers AI",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://ai.google.dev/gemini-api/docs/rate-limits#free-tier",
+        "model": "Gemma",
+        "name": "Google Gemini Google/Gemma 4",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://console.groq.com",
+        "model": "Gemma",
+        "name": "Groq",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://build.nvidia.com/explore/discover",
+        "model": "Gemma",
+        "name": "Nvidia",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://ollama.com/cloud",
+        "model": "Gemma",
+        "name": "Ollama",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://openrouter.ai",
+        "model": "Gemma",
+        "name": "OpenRouter",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits#free-tier",
+        "model": "Gemma",
+        "name": "SambaNova",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      }
+    ],
+    "Kimi": [
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
+        "model": "Kimi",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://build.nvidia.com/explore/discover",
+        "model": "Kimi",
+        "name": "Nvidia",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://ollama.com/cloud",
+        "model": "Kimi",
+        "name": "Ollama",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://www.volcengine.com/docs/84458/1585102",
+        "model": "Kimi",
+        "name": "Volcengine 火山引擎(平台） （500 point 资源点/day）",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      }
+    ],
+    "Llama": [
+      {
+        "key_url": "https://www.aionlabs.ai/app/api-keys/",
+        "model": "Llama",
+        "name": "Aion Labs",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://www.aionlabs.ai/docs/rate-limits/",
+        "model": "Llama",
+        "name": "AionLabs",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
+        "model": "Llama",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://dash.cloudflare.com/profile/api-tokens",
+        "model": "Llama",
+        "name": "Cloudflare Workers AI",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai",
+        "model": "Llama",
+        "name": "Cloudflare Workers AI",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://glhf.chat/",
+        "model": "Llama",
+        "name": "glhf.chat (Free Beta)",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://console.groq.com",
+        "model": "Llama",
+        "name": "Groq",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://huggingface.co/settings/tokens",
+        "model": "Llama",
+        "name": "Hugging Face",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://app.hyperbolic.xyz/",
+        "model": "Llama",
+        "name": "Hyperbolic (Free Testing Period)",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://docs.lambdalabs.com/on-demand-cloud/using-the-lambda-chat-completions-api",
+        "model": "Llama",
+        "name": "Lambda Labs (Free Preview)",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://build.nvidia.com/explore/discover",
+        "model": "Llama",
+        "name": "NVIDIA NIM",
+        "sources": [
+          "FREE-LLM-API-Provider",
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://ollama.com/cloud",
+        "model": "Llama",
+        "name": "Ollama",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://openrouter.ai",
+        "model": "Llama",
+        "name": "OpenRouter",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://endpoints.ai.cloud.ovh.net/",
+        "model": "Llama",
+        "name": "OVH AI Endpoints (Free Alpha)",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits#free-tier",
+        "model": "Llama",
+        "name": "SambaNova",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      }
+    ],
+    "Mistral": [
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
+        "model": "Mistral",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai",
+        "model": "Mistral",
+        "name": "Cloudflare Workers AI",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://console.mistral.ai/",
+        "model": "Mistral",
+        "name": "Mistral",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://docs.mistral.ai/deployment/laplateforme/tier/",
+        "model": "Mistral",
+        "name": "Mistral",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://console.mistral.ai/api-keys",
+        "model": "Mistral",
+        "name": "Mistral AI",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://build.nvidia.com/explore/discover",
+        "model": "Mistral",
+        "name": "Nvidia",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://ollama.com/cloud",
+        "model": "Mistral",
+        "name": "Ollama",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://openrouter.ai",
+        "model": "Mistral",
+        "name": "OpenRouter",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://endpoints.ai.cloud.ovh.net/",
+        "model": "Mistral",
+        "name": "OVH AI Endpoints (Free Alpha)",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://unify.ai/",
+        "model": "Mistral",
+        "name": "Unify",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      }
+    ],
+    "Qwen": [
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
+        "model": "Qwen",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai",
+        "model": "Qwen",
+        "name": "Cloudflare Workers AI",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://console.groq.com/docs/rate-limits",
+        "model": "Qwen",
+        "name": "Groq",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://modelscope.cn/my/myaccesstoken",
+        "model": "Qwen",
+        "name": "ModelScope",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://build.nvidia.com/explore/discover",
+        "model": "Qwen",
+        "name": "Nvidia",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://ollama.com/cloud",
+        "model": "Qwen",
+        "name": "Ollama",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://openrouter.ai",
+        "model": "Qwen",
+        "name": "OpenRouter",
+        "sources": [
+          "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://www.ovhcloud.com/en/public-cloud/ai-endpoints/catalog/",
+        "model": "Qwen",
+        "name": "OVHcloud AI Endpoints",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://cloud.siliconflow.cn/account/ak",
+        "model": "Qwen",
+        "name": "SiliconFlow",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://github.com/SKT-AI/A.X-4.0/blob/main/apis/README.md",
+        "model": "Qwen",
+        "name": "SKT",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://www.volcengine.com/docs/84458/1585102",
+        "model": "Qwen",
+        "name": "Volcengine 火山引擎(平台） （500 point 资源点/day）",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      }
+    ]
+  },
+  "urls": [
+    "https://ai.google.dev/gemini-api/docs/rate-limits",
+    "https://aistudio.google.com/",
+    "https://aistudio.google.com/app/apikey",
+    "https://app.hyperbolic.xyz/",
+    "https://build.nvidia.com/explore/discover",
+    "https://cloud.siliconflow.cn/account/ak",
+    "https://console.anthropic.com/",
+    "https://console.groq.com/",
+    "https://console.groq.com/docs/rate-limits",
+    "https://console.groq.com/keys",
+    "https://console.mistral.ai/",
+    "https://console.mistral.ai/api-keys",
+    "https://dash.cloudflare.com/profile/api-tokens",
+    "https://developers.cloudflare.com/workers-ai",
+    "https://developers.cloudflare.com/workers-ai/platform/pricing",
+    "https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models",
+    "https://docs.lambdalabs.com/on-demand-cloud/using-the-lambda-chat-completions-api",
+    "https://docs.mistral.ai/deployment/laplateforme/tier",
+    "https://docs.sambanova.ai/docs/en/models/rate-limits",
+    "https://docs.z.ai/guides/overview/pricing",
+    "https://endpoints.ai.cloud.ovh.net/",
+    "https://github.com/SKT-AI/A.X-4.0/blob/main/apis/README.md",
+    "https://glhf.chat/",
+    "https://huggingface.co/settings/tokens",
+    "https://modelscope.cn/docs/model-service/API-Inference/limits",
+    "https://modelscope.cn/my/myaccesstoken",
+    "https://ollama.com/cloud",
+    "https://ollama.com/settings/keys",
+    "https://open.bigmodel.cn/usercenter/apikeys",
+    "https://openrouter.ai/",
+    "https://openrouter.ai/keys",
+    "https://token.llm7.io/",
+    "https://unify.ai/",
+    "https://www.aionlabs.ai/app/api-keys",
+    "https://www.aionlabs.ai/docs/rate-limits",
+    "https://www.ovhcloud.com/en/public-cloud/ai-endpoints/catalog",
+    "https://www.volcengine.com/docs/84458/1585102"
+  ]
+}

@@ -1,19 +1,38 @@
 #!/usr/bin/env python3
-"""每日生成按模型分类的免费额度资讯链接邮件"""
+"""Generate a daily multi-source digest of free LLM API entry points."""
 
 import html
+import json
+import os
 import re
-from datetime import datetime
-from typing import Dict, List, NamedTuple
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Dict, Iterable, List, NamedTuple, Set, Tuple
+from urllib.parse import urlsplit, urlunsplit
+
 import requests
 
-SOURCE_REPO = "mnfst/awesome-free-llm-apis"
-SOURCE_URL = f"https://github.com/{SOURCE_REPO}"
+SOURCES = [
+    {
+        "name": "awesome-free-llm-apis",
+        "repo": "mnfst/awesome-free-llm-apis",
+        "url": "https://github.com/mnfst/awesome-free-llm-apis",
+    },
+    {
+        "name": "free-llm-api-resources",
+        "repo": "jtig37/free-llm-api-resources",
+        "url": "https://github.com/jtig37/free-llm-api-resources",
+    },
+    {
+        "name": "FREE-LLM-API-Provider",
+        "repo": "CYBIRD-D/FREE-LLM-API-Provider",
+        "url": "https://github.com/CYBIRD-D/FREE-LLM-API-Provider",
+    },
+]
 
-# 前四个是优先关注模型，后面是其他知名模型
 TARGET_MODELS = {
     "Kimi": ["kimi", "月之暗面", "moonshot"],
-    "GLM": ["glm", "智谱", "chatglm", "zhipu", "bigmodel"],
+    "GLM": ["glm", "智谱", "chatglm", "zhipu", "bigmodel", "z.ai"],
     "DeepSeek": ["deepseek", "深度求索"],
     "Qwen": ["qwen", "通义", "tongyi", "alibaba"],
     "GPT / OpenAI": ["gpt", "openai"],
@@ -24,33 +43,65 @@ TARGET_MODELS = {
     "Claude": ["claude", "anthropic"],
 }
 
+HISTORY_FILE = Path("data/digest_history.json")
+HTTP_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (compatible; FreeTokenBot/2.0)",
+    "Accept": "text/plain,text/markdown",
+}
+
 
 class Platform(NamedTuple):
     name: str
     key_url: str
+    source: str
+    models: tuple[str, ...]
+
+
+def normalize_url(url: str) -> str:
+    """Normalize a URL for stable history comparison."""
+    parts = urlsplit(url.strip())
+    path = parts.path.rstrip("/") or "/"
+    return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, parts.query, ""))
+
+
+def strip_html(value: str) -> str:
+    value = re.sub(r"<br\s*/?>", " ", value, flags=re.I)
+    value = re.sub(r"<[^>]+>", " ", value)
+    return re.sub(r"\s+", " ", html.unescape(value)).strip()
 
 
 def fetch_github_readme(repo: str) -> str:
-    """从 GitHub 获取仓库 README，优先 main 分支，再尝试 master 分支。"""
-    headers = {
-        "User-Agent": "Mozilla/5.0 (compatible; FreeTokenBot/1.0)",
-        "Accept": "text/plain,text/markdown",
-    }
-    for branch in ("main", "master"):
-        url = f"https://raw.githubusercontent.com/{repo}/{branch}/README.md"
+    """Fetch a README through the GitHub API, then raw.githubusercontent.com."""
+    api_url = f"https://api.github.com/repos/{repo}/readme"
+    headers = dict(HTTP_HEADERS)
+    token = os.getenv("GITHUB_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+
+    urls = [api_url]
+    urls.extend(
+        f"https://raw.githubusercontent.com/{repo}/{branch}/README.md"
+        for branch in ("main", "master")
+    )
+
+    for url in urls:
         try:
-            response = requests.get(url, headers=headers, timeout=15)
-            if response.status_code == 200:
+            request_headers = dict(headers)
+            if "api.github.com" in url:
+                request_headers["Accept"] = "application/vnd.github.raw"
+            response = requests.get(url, headers=request_headers, timeout=20)
+            if response.status_code == 200 and response.text.strip():
                 return response.text
+            print(f"获取 {url} 失败：HTTP {response.status_code}")
         except requests.RequestException as error:
             print(f"获取 {url} 失败：{error}")
     return ""
 
 
-def parse_platform_sections(readme: str) -> List[Dict[str, str]]:
-    """解析 README 中的 ### 平台小节。"""
-    sections: List[Dict[str, str]] = []
-    current: Dict[str, str] | None = None
+def markdown_sections(readme: str) -> List[Tuple[str, str, str]]:
+    """Parse `### [title](url)` sections from a Markdown README."""
+    sections: List[Tuple[str, str, str]] = []
+    current: Tuple[str, str, str] | None = None
 
     for line in readme.splitlines():
         match = re.match(r"^### \[([^\]]+)\]\(([^)]+)\)", line)
@@ -58,7 +109,7 @@ def parse_platform_sections(readme: str) -> List[Dict[str, str]]:
             if current:
                 sections.append(current)
             title, url = match.groups()
-            current = {"title": title, "url": url, "body": ""}
+            current = (strip_html(title), url, "")
             continue
 
         if current:
@@ -66,69 +117,227 @@ def parse_platform_sections(readme: str) -> List[Dict[str, str]]:
                 sections.append(current)
                 current = None
                 continue
-            current["body"] += line + "\n"
+            current = (current[0], current[1], current[2] + line + "\n")
 
     if current:
         sections.append(current)
-
     return sections
 
 
-def model_matches(cell: str, keywords: List[str]) -> bool:
-    cell_lower = cell.lower()
-    return any(keyword.lower() in cell_lower for keyword in keywords)
+def model_matches(value: str, keywords: Iterable[str]) -> bool:
+    value = value.lower()
+    return any(keyword.lower() in value for keyword in keywords)
 
 
-def collect_platform_links(readme: str) -> Dict[str, List[Platform]]:
-    """按目标模型收集包含免费额度表格的平台链接。"""
-    links: Dict[str, List[Platform]] = {name: [] for name in TARGET_MODELS}
-    seen: Dict[str, set[str]] = {name: set() for name in TARGET_MODELS}
+def parse_awesome(readme: str, source_name: str) -> List[Platform]:
+    results: List[Platform] = []
+    for name, url, body in markdown_sections(readme):
+        for line in body.splitlines():
+            if not line.startswith("|"):
+                continue
+            cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+            if len(cells) < 4 or set(cells[0]) <= {"-", " ", ":"}:
+                continue
+            matched_models = tuple(
+                model_name
+                for model_name, keywords in TARGET_MODELS.items()
+                if model_matches(cells[0], keywords)
+            )
+            if matched_models:
+                results.append(Platform(name, url, source_name, matched_models))
+                break
+    return results
 
-    for section in parse_platform_sections(readme):
-        platform_name = section["title"]
+
+def parse_jtig(readme: str, source_name: str) -> List[Platform]:
+    """Parse the provider/model HTML table in jrtig37/free-llm-api-resources."""
+    results: List[Platform] = []
+    current_name = ""
+    current_url = ""
+
+    for row in re.findall(r"<tr[^>]*>(.*?)</tr>", readme, flags=re.I | re.S):
+        links = re.findall(r'<a[^>]+href=["\']([^"\']+)["\'][^>]*>(.*?)</a>', row, flags=re.I | re.S)
+        if links:
+            current_url, link_text = links[0]
+            current_name = strip_html(link_text)
+        if not current_name or not current_url:
+            continue
+
+        cells = re.findall(r"<td[^>]*>(.*?)</td>", row, flags=re.I | re.S)
+        cell_text = " ".join(strip_html(cell) for cell in cells)
+        if not cell_text or set(cell_text) <= {"-", " ", ":"}:
+            continue
+        matched_models = tuple(
+            model_name
+            for model_name, keywords in TARGET_MODELS.items()
+            if model_matches(cell_text, keywords)
+        )
+        if matched_models:
+            results.append(Platform(current_name, current_url, source_name, matched_models))
+    return results
+
+
+def parse_cybird(readme: str, source_name: str) -> List[Platform]:
+    """Parse Markdown platform sections and model tables."""
+    results: List[Platform] = []
+    current_name = ""
+    current_url = ""
+    current_body: List[str] = []
+
+    def flush() -> None:
+        nonlocal current_body, current_name
+        body = "\n".join(current_body)
+        current_body = []
+        if not current_name or not current_url:
+            return
+        if current_name.startswith("~~") and current_name.endswith("~~"):
+            return
+        current_name = current_name.replace("~~", "").strip()
+        matched_models: tuple[str, ...] = ()
+        body_text = strip_html(body)
         for model_name, keywords in TARGET_MODELS.items():
-            matched = False
-            for line in section["body"].splitlines():
+            if model_matches(body_text, keywords):
+                matched_models += (model_name,)
+        if not matched_models:
+            for line in body.splitlines():
                 if not line.startswith("|"):
                     continue
                 cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
-                if len(cells) < 5:
+                if len(cells) < 2 or set(cells[0]) <= {"-", " ", ":"}:
                     continue
-                model_cell = cells[0]
-                if set(model_cell) <= {"-", " ", ":"}:
-                    continue
-                if model_matches(model_cell, keywords):
-                    matched = True
-                    break
-
-            if matched and platform_name not in seen[model_name]:
-                links[model_name].append(
-                    Platform(platform_name, section["url"])
+                matched_models += tuple(
+                    model_name
+                    for model_name, keywords in TARGET_MODELS.items()
+                    if model_matches(cells[0], keywords)
                 )
-                seen[model_name].add(platform_name)
+                if matched_models:
+                    break
+        if matched_models:
+            results.append(Platform(current_name, current_url, source_name, matched_models))
 
-    return links
+    for line in readme.splitlines():
+        if line.startswith("### "):
+            flush()
+            current_name = strip_html(line[4:])
+            current_url = ""
+            continue
+
+        if current_name:
+            if line.startswith("## ") and not line.startswith("### "):
+                flush()
+                current_name = ""
+                current_url = ""
+                continue
+            if not current_url:
+                match = re.search(r"https?://[^\s<>)\]]+", line)
+                if match:
+                    current_url = match.group(0).rstrip(".,;，。；")
+            current_body.append(line)
+
+    flush()
+    return results
 
 
-def render_email(links: Dict[str, List[Platform]]) -> str:
-    """生成简洁的 HTML 邮件正文。"""
-    date_text = datetime.now().strftime("%Y年%m月%d日")
+PARSERS = {
+    "mnfst/awesome-free-llm-apis": parse_awesome,
+    "jtig37/free-llm-api-resources": parse_jtig,
+    "CYBIRD-D/FREE-LLM-API-Provider": parse_cybird,
+}
+
+
+def collect_platforms(source_results: List[Tuple[str, str, List[Platform]]]) -> Tuple[Dict[str, List[dict]], List[dict]]:
+    by_model: Dict[str, List[dict]] = {name: [] for name in TARGET_MODELS}
+    platform_by_url: Dict[str, dict] = {}
+    active_source_names = {source["name"] for source in SOURCES}
+
+    # A URL can appear under several models. Merge source attribution globally.
+    for source_name, _, platforms in source_results:
+        for platform in platforms:
+            for model_name in platform.models:
+                normalized = normalize_url(platform.key_url)
+                key = f"{model_name}::{normalized}"
+                if key not in platform_by_url:
+                    platform_by_url[key] = {
+                        "model": model_name,
+                        "name": platform.name,
+                        "key_url": platform.key_url,
+                        "sources": set(),
+                    }
+                platform_by_url[key]["sources"].add(source_name)
+
+    for item in platform_by_url.values():
+        item["sources"] = sorted(
+            source for source in item["sources"] if source in active_source_names
+        )
+        by_model[item["model"]].append(item)
+
+    for platforms in by_model.values():
+        platforms.sort(key=lambda item: (item["name"].lower(), normalize_url(item["key_url"])))
+
+    source_summary = []
+    for source_name, repo, platforms in source_results:
+        source_summary.append(
+            {
+                "name": source_name,
+                "repo": repo,
+                "platform_entries": len(platforms),
+                "ok": bool(platforms),
+            }
+        )
+    return by_model, source_summary
+
+
+def read_history() -> dict | None:
+    if not HISTORY_FILE.exists():
+        return None
+    try:
+        return json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        print(f"读取历史记录失败：{error}")
+        return None
+
+
+def platform_urls(by_model: Dict[str, List[dict]]) -> Set[str]:
+    return {normalize_url(item["key_url"]) for platforms in by_model.values() for item in platforms}
+
+
+def render_email(
+    by_model: Dict[str, List[dict]],
+    source_summary: List[dict],
+    old_urls: Set[str] | None,
+    first_run: bool,
+) -> str:
+    date_text = datetime.now(timezone.utc).astimezone().strftime("%Y年%m月%d日")
+    current_urls = platform_urls(by_model)
+    new_urls = set() if old_urls is None else current_urls - old_urls
+    removed_urls = set() if old_urls is None else old_urls - current_urls
+    all_platform_count = len(current_urls)
     cards = []
 
-    for model_name, platforms in links.items():
+    for model_name, platforms in by_model.items():
         if platforms:
-            items = "".join(
-                f"""
-                <li style="margin: 8px 0;">
-                    <span style="color: #4338ca; font-weight: 600;">{html.escape(platform.name)}</span>
-                    <span style="color: #9ca3af;">·</span>
-                    <a href="{html.escape(platform.key_url)}" style="color: #6366f1;">获取 API Key</a>
-                </li>"""
-                for platform in platforms
-            )
-            status = f"{len(platforms)} 个相关平台"
+            items = []
+            for platform in platforms:
+                is_new = normalize_url(platform["key_url"]) in new_urls
+                new_badge = (
+                    '<span style="display:inline-block; margin-left:6px; padding:1px 6px; border-radius:999px; background:#dcfce7; color:#166534; font-size:11px; font-weight:700;">NEW</span>'
+                    if is_new
+                    else ""
+                )
+                sources = "、".join(html.escape(source) for source in platform["sources"])
+                items.append(
+                    f"""
+                    <li style="margin: 8px 0;">
+                        <span style="color: #4338ca; font-weight: 600;">{html.escape(platform['name'])}</span>{new_badge}
+                        <span style="color: #9ca3af;">·</span>
+                        <a href="{html.escape(platform['key_url'])}" style="color: #6366f1;">获取 API Key</a>
+                        <div style="font-size:11px; color:#9ca3af;">来源：{sources}</div>
+                    </li>"""
+                )
+            items_html = "".join(items)
+            status = f"{len(platforms)} 个相关入口"
         else:
-            items = '<li style="color: #6b7280;">今日未找到明确条目。</li>'
+            items_html = '<li style="color: #6b7280;">今日未找到明确条目。</li>'
             status = "暂无条目"
 
         cards.append(
@@ -136,51 +345,93 @@ def render_email(links: Dict[str, List[Platform]]) -> str:
             <div style="background: #f9fafb; border-left: 4px solid #6366f1; border-radius: 8px; padding: 16px; margin: 16px 0;">
                 <h2 style="margin: 0 0 4px 0; font-size: 18px; color: #312e81;">{html.escape(model_name)}</h2>
                 <p style="margin: 0 0 8px 0; font-size: 12px; color: #6b7280;">{html.escape(status)}</p>
-                <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #374151;">{items}</ul>
+                <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #374151;">{items_html}</ul>
             </div>"""
         )
 
+    if first_run:
+        change_text = "这是多来源版的首次运行，今天先建立基线；明天开始会明确标记新增入口。"
+        change_color = "#92400e"
+    elif new_urls or removed_urls:
+        change_text = f"今日新增 {len(new_urls)} 个入口；移除 {len(removed_urls)} 个入口。"
+        change_color = "#166534"
+    else:
+        change_text = "今日上游列表没有新增或移除入口。这类汇总源通常不会每天都有变化，邮件会继续保留全量入口，并从明天起标记变化。"
+        change_color = "#4b5563"
+
+    source_links = []
+    for source in source_summary:
+        source_repo = next(item["url"] for item in SOURCES if item["name"] == source["name"])
+        state = "可用" if source["ok"] else "无匹配或异常"
+        source_links.append(
+            f'<a href="{html.escape(source_repo)}" style="color:#6366f1;">{html.escape(source["name"])}</a>'
+            f'<span style="color:#9ca3af;">（{state}）</span>'
+        )
+    source_text = "、".join(source_links)
+
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; max-width: 680px; margin: 0 auto; padding: 24px; background: #ffffff; color: #1f2937;">
     <h1 style="margin: 0; font-size: 24px; color: #4338ca;">每日免费 Token 额度入口</h1>
-    <p style="margin: 8px 0 20px 0; font-size: 13px; color: #6b7280;">{date_text} · Kimi · GLM · DeepSeek · Qwen 及其他知名模型</p>
+    <p style="margin: 8px 0 20px 0; font-size: 13px; color: #6b7280;">{date_text} · {all_platform_count} 个去重入口 · Kimi / GLM / DeepSeek / Qwen 及其他模型</p>
 
-    <p style="margin: 0 0 8px 0; font-size: 14px; color: #374151;">
-        以下为按模型汇总的免费额度相关平台。平台名称仅作展示；如需了解额度详情，请通过右侧“获取 API Key”访问平台官网，或自行访问平台官网查询。
-    </p>
+    <div style="background:#eef2ff; border-left:4px solid #6366f1; padding:12px 14px; border-radius:8px; color:{change_color}; font-size:14px;">
+        {change_text}
+    </div>
 
+    <p style="margin:16px 0 8px 0; font-size:14px; color:#374151;">平台名称仅作展示；如需了解额度详情，请通过“获取 API Key”访问平台官网，或自行访问平台官网查询。</p>
     {''.join(cards)}
 
     <p style="border-top: 1px solid #e5e7eb; margin-top: 24px; padding-top: 12px; font-size: 12px; color: #6b7280;">
-        汇总来源：<a href="{SOURCE_URL}" style="color: #6366f1;">awesome-free-llm-apis</a>
+        汇总来源：{source_text}
     </p>
 </body>
 </html>"""
 
 
 def main() -> None:
-    print(f"[{datetime.now()}] 开始生成免费 Token 资讯链接...")
+    print(f"[{datetime.now(timezone.utc).isoformat()}] 开始生成多来源免费 Token 资讯...")
 
-    readme = fetch_github_readme(SOURCE_REPO)
-    if not readme:
-        raise RuntimeError("无法获取上游 README，终止发送，避免发送空邮件")
+    source_results: List[Tuple[str, str, List[Platform]]] = []
+    for source in SOURCES:
+        readme = fetch_github_readme(source["repo"])
+        if not readme:
+            print(f"⚠️ 未获取到 {source['name']}")
+            source_results.append((source["name"], source["repo"], []))
+            continue
+        platforms = PARSERS[source["repo"]](readme, source["name"])
+        source_results.append((source["name"], source["repo"], platforms))
+        print(f"  来源 {source['name']}: 解析 {len(platforms)} 条候选记录")
 
-    links = collect_platform_links(readme)
-    email_html = render_email(links)
+    if not any(platforms for _, _, platforms in source_results):
+        raise RuntimeError("所有来源均未解析到有效平台，终止发送，避免发送空邮件")
 
-    with open("email_body.html", "w", encoding="utf-8") as file:
-        file.write(email_html)
+    by_model, source_summary = collect_platforms(source_results)
+    old_history = read_history()
+    old_urls = None if old_history is None else set(old_history.get("urls", []))
+    first_run = old_history is None
 
-    print("✅ 完成！按模型分类的链接邮件已生成")
-    for model_name, platforms in links.items():
-        print(f"  {model_name}: {len(platforms)} 个平台")
+    email_html = render_email(by_model, source_summary, old_urls, first_run)
+    Path("email_body.html").write_text(email_html, encoding="utf-8")
+
+    # Build a stable history after rendering, so tomorrow's run can compute changes.
+    HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
+    history = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "urls": sorted(platform_urls(by_model)),
+        "models": by_model,
+    }
+    HISTORY_FILE.write_text(
+        json.dumps(history, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    print("✅ 完成！多来源去重邮件已生成")
+    for model_name, platforms in by_model.items():
+        print(f"  {model_name}: {len(platforms)} 个入口")
         for platform in platforms:
-            print(f"    - {platform.name}")
+            print(f"    - {platform['name']} ({', '.join(platform['sources'])})")
 
 
 if __name__ == "__main__":

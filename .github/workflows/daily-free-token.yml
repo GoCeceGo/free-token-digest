@@ -28,6 +28,17 @@ jobs:
 
       - name: Fetch free token info
         run: python fetch_free_tokens.py
+
+      - name: Persist digest history
+        run: |
+          mkdir -p data
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git status --porcelain data/digest_history.json | grep -q .; then
+            git add data/digest_history.json
+            git commit -m "chore: update digest history"
+            git push
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

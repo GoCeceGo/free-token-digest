@@ -1,51 +1,49 @@
 # Daily Free Token Digest
 
-每天自动抓取 **kimi / GLM / DeepSeek / Qwen** 等主流 AI 模型的免费 token 资讯，通过邮件推送到你的邮箱。
+每天自动整理 **Kimi / GLM / DeepSeek / Qwen** 等主流模型的免费 API 入口，按模型分类去重后通过邮件推送。
 
 ## 功能
 
-- 🕘 每天北京时间上午 9:00 自动运行
-- 🔍 抓取多个 GitHub 仓库的免费 token 信息
-- 📧 生成精美的 HTML 邮件发送到你的邮箱
-- 🎯 关键词精准匹配 kimi、GLM、DeepSeek、Qwen
+- 每天北京时间 09:00 自动运行，也支持手动触发
+- 聚合三个 GitHub 信息源
+- 按模型关键词解析平台和模型表格
+- 对平台入口按 URL 去重，并保留来源标注
+- 在仓库中保存每日快照，用于识别新增和移除入口
+- 邮件中用 **NEW** 标记新增入口；无变化时明确说明“上游今天没有变化”
 
-## 快速开始
+## 信息源
 
-### 1. 创建仓库
+- [mnfst/awesome-free-llm-apis](https://github.com/mnfst/awesome-free-llm-apis)
+- [jtig37/free-llm-api-resources](https://github.com/jtig37/free-llm-api-resources)
+- [CYBIRD-D/FREE-LLM-API-Provider](https://github.com/CYBIRD-D/FREE-LLM-API-Provider)
 
-在 GitHub 上新建一个仓库，把此项目代码 push 进去。
+这些仓库本身是维护频率有限的人工整理清单，所以地址不会每天大量变化。多来源聚合的价值在于互为补充、减少单一来源漏项，并通过每日快照让你清楚看到哪些入口是今天新增的。
 
-### 2. 配置 Secrets
+## 配置 Secrets
 
-进入仓库 → **Settings** → 滚动到底部找到 **Secrets and variables** → **Actions** → **New repository secret**，添加三个密钥：
+依次进入仓库的 **Settings → Secrets and variables → Actions**，添加三个 repository secrets：
 
-| Secret 名称 | 说明 | 获取方式 |
-|---|---|---|
-| `SMTP_USERNAME` | 发件邮箱 | 你的 QQ 邮箱地址 |
-| `SMTP_PASSWORD` | 邮箱授权码 | QQ 邮箱设置 → 账户 → SMTP 服务 → 生成授权码 |
-| `RECIPIENT_EMAIL` | 收件邮箱 | 可以和发件人相同 |
+| Secret 名称 | 说明 |
+|---|---|
+| `SMTP_USERNAME` | 发件邮箱 |
+| `SMTP_PASSWORD` | SMTP 授权码，不是邮箱登录密码 |
+| `RECIPIENT_EMAIL` | 收件邮箱，可以和发件邮箱相同 |
 
-> ⚠️ **QQ 邮箱注意**：密码框填的是**授权码**，不是登录密码！需要先在 QQ 邮箱里开启 SMTP 服务并生成授权码。
+## 运行
 
-> 📍 **找不到 Secrets 入口？** 确保你是在**仓库**的 Settings 里（不是 GitHub 账号设置），左侧侧边栏往下滚动，看到 **Secrets and variables** 分类，点进去就有 **Actions** 标签。
+进入 GitHub 仓库的 **Actions → Daily Free Token Digest**，点击 **Run workflow** 即可手动测试；定时任务会在北京时间每天 09:00 运行。
 
-### 3. 启用 workflow
+首次运行会建立多来源基线。之后每封邮件会在顶部说明“新增/移除数量”，并为新增入口添加 **NEW** 标记。
 
-进入 **Actions** 标签页，找到 "Daily Free Token Digest" workflow，点击 **Enable workflow**。
+## 自定义模型
 
-### 4. 手动测试（可选）
+编辑 `fetch_free_tokens.py` 中的 `TARGET_MODELS`，在对应模型的关键词列表中补充别名即可，例如模型的新英文名、中文品牌名或常见项目名。
 
-workflow 页面 → 点击 **Run workflow** 按钮，立即测试一次。
+## 维护说明
 
-## 自定义
-
-- 修改 `.github/workflows/daily-free-token.yml` 中的 `cron` 表达式来调整运行时间
-- 在 `fetch_free_tokens.py` 的 `TARGET_MODELS` 字典中添加/移除模型
-
-## 数据源
-
-- [mnfst/awesome-free-llm-apis](https://github.com/mnfst/awesome-free-llm-apis) — 免费 LLM API 资源聚合 (7.5K+ stars)
-- GitHub API 实时搜索
+- `data/digest_history.json` 会随每日运行自动提交，用于对比变化。
+- `email_body.html` 只是运行产物，不提交到仓库。
+- 抓取顺序为 GitHub API 优先，失败后回退到 `raw.githubusercontent.com`，避免单一域名故障影响邮件发送。
 
 ## License
 
