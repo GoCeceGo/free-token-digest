@@ -44,26 +44,6 @@ TARGET_MODELS = {
 }
 
 HISTORY_FILE = Path("data/digest_history.json")
-
-# Curated details make free-tier terms easier to understand than upstream links alone.
-DEFAULT_PLATFORM_DETAILS = {
-    "free_quota": "未能确认长期免费额度",
-    "quota_unit": "请以平台官网为准",
-    "key_url": "",
-    "key_location": "请自行访问平台官网",
-    "pricing_url": "请自行访问平台官网",
-    "notes": "可能需要注册、实名认证或绑定支付方式；未确认前请谨慎操作",
-}
-PLATFORM_DETAILS = {
-    "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing": {
-        "free_quota": "免费版每日约 10,000 Neurons，用完后需付费",
-        "quota_unit": "Neurons，不是直接显示 token",
-        "key_url": "https://dash.cloudflare.com/profile/api-tokens",
-        "key_location": "Cloudflare Dashboard → API Tokens",
-        "pricing_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
-        "notes": "需要 Account ID + API Token",
-    },
-}
 HTTP_HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; FreeTokenBot/2.0)",
     "Accept": "text/plain,text/markdown",
@@ -82,16 +62,6 @@ def normalize_url(url: str) -> str:
     parts = urlsplit(url.strip())
     path = parts.path.rstrip("/") or "/"
     return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, parts.query, ""))
-
-
-def canonical_url(url: str) -> str:
-    """Collapse known duplicate platform links into one canonical entry."""
-    normalized = normalize_url(url)
-    if normalized.startswith("https://developers.cloudflare.com/workers-ai") or normalized == (
-        "https://dash.cloudflare.com/profile/api-tokens"
-    ):
-        return "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing"
-    return normalized
 
 
 def strip_html(value: str) -> str:
@@ -284,13 +254,13 @@ def collect_platforms(source_results: List[Tuple[str, str, List[Platform]]]) -> 
     for source_name, _, platforms in source_results:
         for platform in platforms:
             for model_name in platform.models:
-                normalized = canonical_url(platform.key_url)
+                normalized = normalize_url(platform.key_url)
                 key = f"{model_name}::{normalized}"
                 if key not in platform_by_url:
                     platform_by_url[key] = {
                         "model": model_name,
                         "name": platform.name,
-                        "key_url": canonical_url(platform.key_url),
+                        "key_url": platform.key_url,
                         "sources": set(),
                     }
                 platform_by_url[key]["sources"].add(source_name)
@@ -328,7 +298,7 @@ def read_history() -> dict | None:
 
 
 def platform_urls(by_model: Dict[str, List[dict]]) -> Set[str]:
-    return {canonical_url(item["key_url"]) for platforms in by_model.values() for item in platforms}
+    return {normalize_url(item["key_url"]) for platforms in by_model.values() for item in platforms}
 
 
 def render_email(
@@ -348,43 +318,20 @@ def render_email(
         if platforms:
             items = []
             for platform in platforms:
-                is_new = canonical_url(platform["key_url"]) in new_urls
+                is_new = normalize_url(platform["key_url"]) in new_urls
                 new_badge = (
                     '<span style="display:inline-block; margin-left:6px; padding:1px 6px; border-radius:999px; background:#dcfce7; color:#166534; font-size:11px; font-weight:700;">NEW</span>'
                     if is_new
                     else ""
                 )
                 sources = "、".join(html.escape(source) for source in platform["sources"])
-                detail = PLATFORM_DETAILS.get(platform["key_url"], DEFAULT_PLATFORM_DETAILS)
-                pricing_value = (
-                    f'<a href="{html.escape(detail["pricing_url"])}" style="color:#6366f1;">pricing 链接</a>'
-                    if detail["pricing_url"].startswith("http")
-                    else detail["pricing_url"]
-                )
-                details = [
-                    ("免费额度", detail["free_quota"]),
-                    ("额度形式", detail["quota_unit"]),
-                    ("获取 Key", detail["key_location"]),
-                    ("计费说明", pricing_value),
-                    ("注意事项", detail["notes"]),
-                ]
-                details_html = "".join(
-                    f"""
-                            <div style="margin-top: 4px; font-size: 12px; color: #4b5563;">
-                                <span style="color:#6b7280;">{label}：</span>{value}
-                            </div>"""
-                    for label, value in details
-                )
                 items.append(
                     f"""
-                    <li style="margin: 12px 0;">
-                        <div>
-                            <span style="color: #4338ca; font-weight: 600;">{html.escape(platform['name'])}</span>{new_badge}
-                            <span style="color: #9ca3af;">·</span>
-                            {f'<a href="{html.escape(detail["key_url"])}" style="color: #6366f1;">平台入口 / 获取 Key</a>' if detail["key_url"] else '<span style="color:#6b7280;">详情请自行访问平台官网</span>'}
-                        </div>
-                        {details_html}
-                        <div style="margin-top: 4px; font-size:11px; color:#9ca3af;">来源：{sources}</div>
+                    <li style="margin: 8px 0;">
+                        <span style="color: #4338ca; font-weight: 600;">{html.escape(platform['name'])}</span>{new_badge}
+                        <span style="color: #9ca3af;">·</span>
+                        <a href="{html.escape(platform['key_url'])}" style="color: #6366f1;">获取 API Key</a>
+                        <div style="font-size:11px; color:#9ca3af;">来源：{sources}</div>
                     </li>"""
                 )
             items_html = "".join(items)
@@ -433,7 +380,7 @@ def render_email(
         {change_text}
     </div>
 
-    <p style="margin:16px 0 8px 0; font-size:14px; color:#374151;">以下条目按“免费额度、额度形式、获取 Key、计费说明、注意事项”展示；无法确认免费额度的平台会明确标注，避免误导。</p>
+    <p style="margin:16px 0 8px 0; font-size:14px; color:#374151;">平台名称仅作展示；如需了解额度详情，请通过“获取 API Key”访问平台官网，或自行访问平台官网查询。</p>
     {''.join(cards)}
 
     <p style="border-top: 1px solid #e5e7eb; margin-top: 24px; padding-top: 12px; font-size: 12px; color: #6b7280;">
