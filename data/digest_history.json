@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T04:50:44.412868+00:00",
+  "generated_at": "2026-09-10T04:56:32.695936+00:00",
   "models": {
     "Claude": [
       {
@@ -21,7 +21,7 @@
     ],
     "DeepSeek": [
       {
-        "key_url": "https://www.aionlabs.ai/docs/rate-limits",
+        "key_url": "https://www.aionlabs.ai/docs/rate-limits/",
         "model": "DeepSeek",
         "name": "AionLabs",
         "sources": [
@@ -31,14 +31,21 @@
       {
         "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
         "model": "DeepSeek",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai",
+        "model": "DeepSeek",
         "name": "Cloudflare Workers AI",
         "sources": [
-          "FREE-LLM-API-Provider",
           "free-llm-api-resources"
         ]
       },
       {
-        "key_url": "https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models",
+        "key_url": "https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models#rate-limits",
         "model": "DeepSeek",
         "name": "Github",
         "sources": [
@@ -78,7 +85,7 @@
         ]
       },
       {
-        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits",
+        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits#free-tier",
         "model": "DeepSeek",
         "name": "SambaNova",
         "sources": [
@@ -96,7 +103,7 @@
     ],
     "GLM": [
       {
-        "key_url": "https://www.aionlabs.ai/docs/rate-limits",
+        "key_url": "https://www.aionlabs.ai/docs/rate-limits/",
         "model": "GLM",
         "name": "AionLabs",
         "sources": [
@@ -170,7 +177,7 @@
         ]
       },
       {
-        "key_url": "https://token.llm7.io/",
+        "key_url": "https://token.llm7.io",
         "model": "GPT / OpenAI",
         "name": "LLM7.io",
         "sources": [
@@ -202,7 +209,7 @@
         ]
       },
       {
-        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits",
+        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits#free-tier",
         "model": "GPT / OpenAI",
         "name": "SambaNova",
         "sources": [
@@ -220,7 +227,7 @@
     ],
     "Gemini": [
       {
-        "key_url": "https://aistudio.google.com/",
+        "key_url": "https://aistudio.google.com",
         "model": "Gemini",
         "name": "Google AI Studio",
         "sources": [
@@ -236,7 +243,7 @@
         ]
       },
       {
-        "key_url": "https://ai.google.dev/gemini-api/docs/rate-limits",
+        "key_url": "https://ai.google.dev/gemini-api/docs/rate-limits#free-tier",
         "model": "Gemini",
         "name": "Google Gemini Google/Gemma 4",
         "sources": [
@@ -256,14 +263,21 @@
       {
         "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
         "model": "Gemma",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai",
+        "model": "Gemma",
         "name": "Cloudflare Workers AI",
         "sources": [
-          "FREE-LLM-API-Provider",
           "free-llm-api-resources"
         ]
       },
       {
-        "key_url": "https://ai.google.dev/gemini-api/docs/rate-limits",
+        "key_url": "https://ai.google.dev/gemini-api/docs/rate-limits#free-tier",
         "model": "Gemma",
         "name": "Google Gemini Google/Gemma 4",
         "sources": [
@@ -271,7 +285,7 @@
         ]
       },
       {
-        "key_url": "https://console.groq.com/",
+        "key_url": "https://console.groq.com",
         "model": "Gemma",
         "name": "Groq",
         "sources": [
@@ -295,7 +309,7 @@
         ]
       },
       {
-        "key_url": "https://openrouter.ai/",
+        "key_url": "https://openrouter.ai",
         "model": "Gemma",
         "name": "OpenRouter",
         "sources": [
@@ -303,7 +317,7 @@
         ]
       },
       {
-        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits",
+        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits#free-tier",
         "model": "Gemma",
         "name": "SambaNova",
         "sources": [
@@ -347,7 +361,7 @@
     ],
     "Llama": [
       {
-        "key_url": "https://www.aionlabs.ai/app/api-keys",
+        "key_url": "https://www.aionlabs.ai/app/api-keys/",
         "model": "Llama",
         "name": "Aion Labs",
         "sources": [
@@ -355,7 +369,7 @@
         ]
       },
       {
-        "key_url": "https://www.aionlabs.ai/docs/rate-limits",
+        "key_url": "https://www.aionlabs.ai/docs/rate-limits/",
         "model": "Llama",
         "name": "AionLabs",
         "sources": [
@@ -365,10 +379,24 @@
       {
         "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
         "model": "Llama",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://dash.cloudflare.com/profile/api-tokens",
+        "model": "Llama",
         "name": "Cloudflare Workers AI",
         "sources": [
-          "FREE-LLM-API-Provider",
-          "awesome-free-llm-apis",
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai",
+        "model": "Llama",
+        "name": "Cloudflare Workers AI",
+        "sources": [
           "free-llm-api-resources"
         ]
       },
@@ -381,7 +409,7 @@
         ]
       },
       {
-        "key_url": "https://console.groq.com/",
+        "key_url": "https://console.groq.com",
         "model": "Llama",
         "name": "Groq",
         "sources": [
@@ -430,7 +458,7 @@
         ]
       },
       {
-        "key_url": "https://openrouter.ai/",
+        "key_url": "https://openrouter.ai",
         "model": "Llama",
         "name": "OpenRouter",
         "sources": [
@@ -446,7 +474,7 @@
         ]
       },
       {
-        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits",
+        "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits#free-tier",
         "model": "Llama",
         "name": "SambaNova",
         "sources": [
@@ -458,9 +486,16 @@
       {
         "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
         "model": "Mistral",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai",
+        "model": "Mistral",
         "name": "Cloudflare Workers AI",
         "sources": [
-          "FREE-LLM-API-Provider",
           "free-llm-api-resources"
         ]
       },
@@ -473,7 +508,7 @@
         ]
       },
       {
-        "key_url": "https://docs.mistral.ai/deployment/laplateforme/tier",
+        "key_url": "https://docs.mistral.ai/deployment/laplateforme/tier/",
         "model": "Mistral",
         "name": "Mistral",
         "sources": [
@@ -505,7 +540,7 @@
         ]
       },
       {
-        "key_url": "https://openrouter.ai/",
+        "key_url": "https://openrouter.ai",
         "model": "Mistral",
         "name": "OpenRouter",
         "sources": [
@@ -533,9 +568,16 @@
       {
         "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
         "model": "Qwen",
+        "name": "Cloudflare",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developers.cloudflare.com/workers-ai",
+        "model": "Qwen",
         "name": "Cloudflare Workers AI",
         "sources": [
-          "FREE-LLM-API-Provider",
           "free-llm-api-resources"
         ]
       },
@@ -572,7 +614,7 @@
         ]
       },
       {
-        "key_url": "https://openrouter.ai/",
+        "key_url": "https://openrouter.ai",
         "model": "Qwen",
         "name": "OpenRouter",
         "sources": [
@@ -580,7 +622,7 @@
         ]
       },
       {
-        "key_url": "https://www.ovhcloud.com/en/public-cloud/ai-endpoints/catalog",
+        "key_url": "https://www.ovhcloud.com/en/public-cloud/ai-endpoints/catalog/",
         "model": "Qwen",
         "name": "OVHcloud AI Endpoints",
         "sources": [
@@ -626,7 +668,9 @@
     "https://console.groq.com/keys",
     "https://console.mistral.ai/",
     "https://console.mistral.ai/api-keys",
-    "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
+    "https://dash.cloudflare.com/profile/api-tokens",
+    "https://developers.cloudflare.com/workers-ai",
+    "https://developers.cloudflare.com/workers-ai/platform/pricing",
     "https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models",
     "https://docs.lambdalabs.com/on-demand-cloud/using-the-lambda-chat-completions-api",
     "https://docs.mistral.ai/deployment/laplateforme/tier",
