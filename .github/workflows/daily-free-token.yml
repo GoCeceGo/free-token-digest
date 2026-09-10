@@ -28,6 +28,8 @@ jobs:
 
       - name: Fetch free token info
         run: python fetch_free_tokens.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Persist digest history
         run: |
