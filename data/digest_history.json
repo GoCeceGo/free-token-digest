@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T05:25:11.067032+00:00",
+  "generated_at": "2026-09-24T05:43:26.653102+00:00",
   "models": {
     "Claude": [
       {
@@ -42,14 +42,6 @@
         "name": "Cloudflare Workers AI",
         "sources": [
           "free-llm-api-resources"
-        ]
-      },
-      {
-        "key_url": "https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models#rate-limits",
-        "model": "DeepSeek",
-        "name": "Github",
-        "sources": [
-          "FREE-LLM-API-Provider"
         ]
       },
       {
@@ -671,7 +663,6 @@
     "https://dash.cloudflare.com/profile/api-tokens",
     "https://developers.cloudflare.com/workers-ai",
     "https://developers.cloudflare.com/workers-ai/platform/pricing",
-    "https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models",
     "https://docs.lambdalabs.com/on-demand-cloud/using-the-lambda-chat-completions-api",
     "https://docs.mistral.ai/deployment/laplateforme/tier",
     "https://docs.sambanova.ai/docs/en/models/rate-limits",
