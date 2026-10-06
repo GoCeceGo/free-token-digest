@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T06:27:50.683023+00:00",
+  "generated_at": "2026-10-06T07:04:10.277638+00:00",
   "models": {
     "Claude": [
       {
@@ -193,14 +193,6 @@
         ]
       },
       {
-        "key_url": "https://openrouter.ai/keys",
-        "model": "GPT / OpenAI",
-        "name": "OpenRouter",
-        "sources": [
-          "awesome-free-llm-apis"
-        ]
-      },
-      {
         "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits#free-tier",
         "model": "GPT / OpenAI",
         "name": "SambaNova",
@@ -306,6 +298,14 @@
         "name": "OpenRouter",
         "sources": [
           "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://openrouter.ai/keys",
+        "model": "Gemma",
+        "name": "OpenRouter",
+        "sources": [
+          "awesome-free-llm-apis"
         ]
       },
       {
@@ -582,6 +582,14 @@
         ]
       },
       {
+        "key_url": "https://app.kilo.ai/profile",
+        "model": "Qwen",
+        "name": "Kilo Code",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
         "key_url": "https://modelscope.cn/my/myaccesstoken",
         "model": "Qwen",
         "name": "ModelScope",
@@ -652,6 +660,7 @@
     "https://aistudio.google.com/",
     "https://aistudio.google.com/app/apikey",
     "https://app.hyperbolic.xyz/",
+    "https://app.kilo.ai/profile",
     "https://build.nvidia.com/explore/discover",
     "https://cloud.siliconflow.cn/account/ak",
     "https://console.anthropic.com/",
