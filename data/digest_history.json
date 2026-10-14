@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T07:15:55.362497+00:00",
+  "generated_at": "2026-10-14T05:41:26.730780+00:00",
   "models": {
     "Claude": [
       {
@@ -11,9 +11,9 @@
         ]
       },
       {
-        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing?utm_source=chatgpt.com",
+        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
         "model": "Claude",
-        "name": "LLM API Pricing — October 08, 2026",
+        "name": "LLM API Pricing — October 14, 2026",
         "sources": [
           "FREE-LLM-API-Provider"
         ]
@@ -53,9 +53,9 @@
         ]
       },
       {
-        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing?utm_source=chatgpt.com",
+        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
         "model": "DeepSeek",
-        "name": "LLM API Pricing — October 08, 2026",
+        "name": "LLM API Pricing — October 14, 2026",
         "sources": [
           "FREE-LLM-API-Provider"
         ]
@@ -127,9 +127,9 @@
         ]
       },
       {
-        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing?utm_source=chatgpt.com",
+        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
         "model": "GLM",
-        "name": "LLM API Pricing — October 08, 2026",
+        "name": "LLM API Pricing — October 14, 2026",
         "sources": [
           "FREE-LLM-API-Provider"
         ]
@@ -193,9 +193,9 @@
         ]
       },
       {
-        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing?utm_source=chatgpt.com",
+        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
         "model": "GPT / OpenAI",
-        "name": "LLM API Pricing — October 08, 2026",
+        "name": "LLM API Pricing — October 14, 2026",
         "sources": [
           "FREE-LLM-API-Provider"
         ]
@@ -267,9 +267,9 @@
         ]
       },
       {
-        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing?utm_source=chatgpt.com",
+        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
         "model": "Gemini",
-        "name": "LLM API Pricing — October 08, 2026",
+        "name": "LLM API Pricing — October 14, 2026",
         "sources": [
           "FREE-LLM-API-Provider"
         ]
@@ -367,9 +367,9 @@
         ]
       },
       {
-        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing?utm_source=chatgpt.com",
+        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
         "model": "Kimi",
-        "name": "LLM API Pricing — October 08, 2026",
+        "name": "LLM API Pricing — October 14, 2026",
         "sources": [
           "FREE-LLM-API-Provider"
         ]
@@ -540,9 +540,9 @@
         ]
       },
       {
-        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing?utm_source=chatgpt.com",
+        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
         "model": "Mistral",
-        "name": "LLM API Pricing — October 08, 2026",
+        "name": "LLM API Pricing — October 14, 2026",
         "sources": [
           "FREE-LLM-API-Provider"
         ]
@@ -646,9 +646,9 @@
         ]
       },
       {
-        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing?utm_source=chatgpt.com",
+        "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
         "model": "Qwen",
-        "name": "LLM API Pricing — October 08, 2026",
+        "name": "LLM API Pricing — October 14, 2026",
         "sources": [
           "FREE-LLM-API-Provider"
         ]
@@ -755,7 +755,7 @@
     "https://unify.ai/",
     "https://www.aionlabs.ai/app/api-keys",
     "https://www.aionlabs.ai/docs/rate-limits",
-    "https://www.alibabacloud.com/help/en/model-studio/model-pricing?utm_source=chatgpt.com",
+    "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
     "https://www.ovhcloud.com/en/public-cloud/ai-endpoints/catalog",
     "https://www.volcengine.com/docs/84458/1585102"
   ]
