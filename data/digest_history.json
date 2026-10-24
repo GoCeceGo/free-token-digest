@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T05:37:41.072736+00:00",
+  "generated_at": "2026-10-24T05:16:35.936447+00:00",
   "models": {
     "Claude": [
       {
@@ -50,6 +50,14 @@
         "name": "Cloudflare Workers AI",
         "sources": [
           "free-llm-api-resources"
+        ]
+      },
+      {
+        "key_url": "https://app.gonkabroker.com/signup",
+        "model": "DeepSeek",
+        "name": "Gonka Broker",
+        "sources": [
+          "awesome-free-llm-apis"
         ]
       },
       {
@@ -638,14 +646,6 @@
         ]
       },
       {
-        "key_url": "https://app.kilo.ai/profile",
-        "model": "Qwen",
-        "name": "Kilo Code",
-        "sources": [
-          "awesome-free-llm-apis"
-        ]
-      },
-      {
         "key_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
         "model": "Qwen",
         "name": "LLM API Pricing — October 14, 2026",
@@ -694,14 +694,6 @@
         ]
       },
       {
-        "key_url": "https://cloud.siliconflow.cn/account/ak",
-        "model": "Qwen",
-        "name": "SiliconFlow",
-        "sources": [
-          "awesome-free-llm-apis"
-        ]
-      },
-      {
         "key_url": "https://github.com/SKT-AI/A.X-4.0/blob/main/apis/README.md",
         "model": "Qwen",
         "name": "SKT",
@@ -723,10 +715,9 @@
     "https://ai.google.dev/gemini-api/docs/rate-limits",
     "https://aistudio.google.com/",
     "https://aistudio.google.com/app/apikey",
+    "https://app.gonkabroker.com/signup",
     "https://app.hyperbolic.xyz/",
-    "https://app.kilo.ai/profile",
     "https://build.nvidia.com/explore/discover",
-    "https://cloud.siliconflow.cn/account/ak",
     "https://console.anthropic.com/",
     "https://console.groq.com/",
     "https://console.groq.com/docs/rate-limits",
