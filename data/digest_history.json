@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25T05:33:22.115021+00:00",
+  "generated_at": "2026-10-26T05:40:22.811228+00:00",
   "models": {
     "Claude": [
       {
@@ -90,14 +90,6 @@
         "name": "Ollama",
         "sources": [
           "FREE-LLM-API-Provider"
-        ]
-      },
-      {
-        "key_url": "https://ollama.com/settings/keys",
-        "model": "DeepSeek",
-        "name": "Ollama Cloud",
-        "sources": [
-          "awesome-free-llm-apis"
         ]
       },
       {
@@ -233,6 +225,14 @@
         ]
       },
       {
+        "key_url": "https://ollama.com/settings/keys",
+        "model": "GPT / OpenAI",
+        "name": "Ollama Cloud",
+        "sources": [
+          "awesome-free-llm-apis"
+        ]
+      },
+      {
         "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits#free-tier",
         "model": "GPT / OpenAI",
         "name": "SambaNova",
@@ -327,9 +327,10 @@
       {
         "key_url": "https://build.nvidia.com/explore/discover",
         "model": "Gemma",
-        "name": "Nvidia",
+        "name": "NVIDIA NIM",
         "sources": [
-          "FREE-LLM-API-Provider"
+          "FREE-LLM-API-Provider",
+          "awesome-free-llm-apis"
         ]
       },
       {
@@ -465,14 +466,6 @@
         ]
       },
       {
-        "key_url": "https://huggingface.co/settings/tokens",
-        "model": "Llama",
-        "name": "Hugging Face",
-        "sources": [
-          "awesome-free-llm-apis"
-        ]
-      },
-      {
         "key_url": "https://app.hyperbolic.xyz/",
         "model": "Llama",
         "name": "Hyperbolic (Free Testing Period)",
@@ -491,10 +484,9 @@
       {
         "key_url": "https://build.nvidia.com/explore/discover",
         "model": "Llama",
-        "name": "NVIDIA NIM",
+        "name": "Nvidia",
         "sources": [
-          "FREE-LLM-API-Provider",
-          "awesome-free-llm-apis"
+          "FREE-LLM-API-Provider"
         ]
       },
       {
@@ -734,7 +726,6 @@
     "https://endpoints.ai.cloud.ovh.net/",
     "https://github.com/SKT-AI/A.X-4.0/blob/main/apis/README.md",
     "https://glhf.chat/",
-    "https://huggingface.co/settings/tokens",
     "https://modelscope.cn/docs/model-service/API-Inference/limits",
     "https://modelscope.cn/my/myaccesstoken",
     "https://ollama.com/cloud",
