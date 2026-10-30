@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T06:40:18.062146+00:00",
+  "generated_at": "2026-10-30T06:41:11.177626+00:00",
   "models": {
     "Claude": [
       {
@@ -222,14 +222,6 @@
         "name": "Ollama",
         "sources": [
           "FREE-LLM-API-Provider"
-        ]
-      },
-      {
-        "key_url": "https://ollama.com/settings/keys",
-        "model": "GPT / OpenAI",
-        "name": "Ollama Cloud",
-        "sources": [
-          "awesome-free-llm-apis"
         ]
       },
       {
@@ -729,7 +721,6 @@
     "https://modelscope.cn/docs/model-service/API-Inference/limits",
     "https://modelscope.cn/my/myaccesstoken",
     "https://ollama.com/cloud",
-    "https://ollama.com/settings/keys",
     "https://open.bigmodel.cn/usercenter/apikeys",
     "https://openrouter.ai/",
     "https://openrouter.ai/keys",
