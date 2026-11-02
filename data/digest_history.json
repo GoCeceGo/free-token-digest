@@ -1,7 +1,15 @@
 {
-  "generated_at": "2026-11-01T07:02:07.385224+00:00",
+  "generated_at": "2026-11-02T07:01:43.296238+00:00",
   "models": {
     "Claude": [
+      {
+        "key_url": "https://developer.amd.com.cn/radeon/tokenfactory",
+        "model": "Claude",
+        "name": "AMD Radeon Cloud Token Factory (China site)",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
       {
         "key_url": "https://console.anthropic.com/",
         "model": "Claude",
@@ -32,6 +40,14 @@
         "key_url": "https://www.aionlabs.ai/docs/rate-limits/",
         "model": "DeepSeek",
         "name": "AionLabs",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://developer.amd.com.cn/radeon/tokenfactory",
+        "model": "DeepSeek",
+        "name": "AMD Radeon Cloud Token Factory (China site)",
         "sources": [
           "FREE-LLM-API-Provider"
         ]
@@ -111,6 +127,14 @@
         ]
       },
       {
+        "key_url": "https://developer.amd.com.cn/radeon/tokenfactory",
+        "model": "GLM",
+        "name": "AMD Radeon Cloud Token Factory (China site)",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
         "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
         "model": "GLM",
         "name": "Cloudflare",
@@ -160,6 +184,14 @@
       }
     ],
     "GPT / OpenAI": [
+      {
+        "key_url": "https://developer.amd.com.cn/radeon/tokenfactory",
+        "model": "GPT / OpenAI",
+        "name": "AMD Radeon Cloud Token Factory (China site)",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
       {
         "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
         "model": "GPT / OpenAI",
@@ -308,6 +340,14 @@
       }
     ],
     "Gemma": [
+      {
+        "key_url": "https://developer.amd.com.cn/radeon/tokenfactory",
+        "model": "Gemma",
+        "name": "AMD Radeon Cloud Token Factory (China site)",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
       {
         "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
         "model": "Gemma",
@@ -637,6 +677,14 @@
     ],
     "Qwen": [
       {
+        "key_url": "https://developer.amd.com.cn/radeon/tokenfactory",
+        "model": "Qwen",
+        "name": "AMD Radeon Cloud Token Factory (China site)",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
         "key_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/#llm-model-pricing",
         "model": "Qwen",
         "name": "Cloudflare",
@@ -725,6 +773,7 @@
     "https://console.mistral.ai/",
     "https://console.mistral.ai/api-keys",
     "https://dash.cloudflare.com/profile/api-tokens",
+    "https://developer.amd.com.cn/radeon/tokenfactory",
     "https://developers.cloudflare.com/workers-ai",
     "https://developers.cloudflare.com/workers-ai/platform/pricing",
     "https://docs.lambdalabs.com/on-demand-cloud/using-the-lambda-chat-completions-api",
