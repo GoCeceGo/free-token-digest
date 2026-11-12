@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T07:25:25.428346+00:00",
+  "generated_at": "2026-11-12T07:53:17.900230+00:00",
   "models": {
     "Claude": [
       {
@@ -627,14 +627,6 @@
         ]
       },
       {
-        "key_url": "https://console.mistral.ai/api-keys",
-        "model": "Mistral",
-        "name": "Mistral AI",
-        "sources": [
-          "awesome-free-llm-apis"
-        ]
-      },
-      {
         "key_url": "https://build.nvidia.com/models",
         "model": "Mistral",
         "name": "Nvidia",
@@ -771,7 +763,6 @@
     "https://console.groq.com/docs/rate-limits",
     "https://console.groq.com/keys",
     "https://console.mistral.ai/",
-    "https://console.mistral.ai/api-keys",
     "https://dash.cloudflare.com/profile/api-tokens",
     "https://developer.amd.com.cn/radeon/tokenfactory",
     "https://developers.cloudflare.com/workers-ai",
