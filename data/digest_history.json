@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T07:30:20.678109+00:00",
+  "generated_at": "2026-11-14T07:15:11.455688+00:00",
   "models": {
     "Claude": [
       {
@@ -93,14 +93,6 @@
         ]
       },
       {
-        "key_url": "https://ollama.com/pricing",
-        "model": "DeepSeek",
-        "name": "Ollama",
-        "sources": [
-          "FREE-LLM-API-Provider"
-        ]
-      },
-      {
         "key_url": "https://docs.sambanova.ai/docs/en/models/rate-limits#free-tier",
         "model": "DeepSeek",
         "name": "SambaNova",
@@ -159,14 +151,6 @@
         ]
       },
       {
-        "key_url": "https://ollama.com/pricing",
-        "model": "GLM",
-        "name": "Ollama",
-        "sources": [
-          "FREE-LLM-API-Provider"
-        ]
-      },
-      {
         "key_url": "https://open.bigmodel.cn/usercenter/apikeys",
         "model": "GLM",
         "name": "Z AI (Zhipu AI)",
@@ -217,6 +201,14 @@
         ]
       },
       {
+        "key_url": "https://github.com/bilibili/Index-Translate",
+        "model": "GPT / OpenAI",
+        "name": "Index-Translate (bilibili)",
+        "sources": [
+          "FREE-LLM-API-Provider"
+        ]
+      },
+      {
         "key_url": "https://github.com/CYBIRD-D/LLM-API-Official-Pricing-Tracker",
         "model": "GPT / OpenAI",
         "name": "LLM API Pricing — 2026-10-30",
@@ -241,11 +233,11 @@
         ]
       },
       {
-        "key_url": "https://ollama.com/pricing",
+        "key_url": "https://build.nvidia.com/explore/discover",
         "model": "GPT / OpenAI",
-        "name": "Ollama",
+        "name": "NVIDIA NIM",
         "sources": [
-          "FREE-LLM-API-Provider"
+          "awesome-free-llm-apis"
         ]
       },
       {
@@ -389,22 +381,6 @@
         ]
       },
       {
-        "key_url": "https://build.nvidia.com/explore/discover",
-        "model": "Gemma",
-        "name": "NVIDIA NIM",
-        "sources": [
-          "awesome-free-llm-apis"
-        ]
-      },
-      {
-        "key_url": "https://ollama.com/pricing",
-        "model": "Gemma",
-        "name": "Ollama",
-        "sources": [
-          "FREE-LLM-API-Provider"
-        ]
-      },
-      {
         "key_url": "https://openrouter.ai",
         "model": "Gemma",
         "name": "OpenRouter",
@@ -450,14 +426,6 @@
         "key_url": "https://build.nvidia.com/models",
         "model": "Kimi",
         "name": "Nvidia",
-        "sources": [
-          "FREE-LLM-API-Provider"
-        ]
-      },
-      {
-        "key_url": "https://ollama.com/pricing",
-        "model": "Kimi",
-        "name": "Ollama",
         "sources": [
           "FREE-LLM-API-Provider"
         ]
@@ -553,14 +521,6 @@
         ]
       },
       {
-        "key_url": "https://ollama.com/pricing",
-        "model": "Llama",
-        "name": "Ollama",
-        "sources": [
-          "FREE-LLM-API-Provider"
-        ]
-      },
-      {
         "key_url": "https://openrouter.ai",
         "model": "Llama",
         "name": "OpenRouter",
@@ -630,14 +590,6 @@
         "key_url": "https://build.nvidia.com/models",
         "model": "Mistral",
         "name": "Nvidia",
-        "sources": [
-          "FREE-LLM-API-Provider"
-        ]
-      },
-      {
-        "key_url": "https://ollama.com/pricing",
-        "model": "Mistral",
-        "name": "Ollama",
         "sources": [
           "FREE-LLM-API-Provider"
         ]
@@ -776,10 +728,10 @@
     "https://endpoints.ai.cloud.ovh.net/",
     "https://github.com/CYBIRD-D/LLM-API-Official-Pricing-Tracker",
     "https://github.com/SKT-AI/A.X-4.0/blob/main/apis/README.md",
+    "https://github.com/bilibili/Index-Translate",
     "https://glhf.chat/",
     "https://modelscope.cn/docs/model-service/API-Inference/limits",
     "https://modelscope.cn/my/myaccesstoken",
-    "https://ollama.com/pricing",
     "https://open.bigmodel.cn/usercenter/apikeys",
     "https://openrouter.ai/",
     "https://openrouter.ai/collections/free-models",
