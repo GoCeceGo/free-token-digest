@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T07:39:46.691961+00:00",
+  "generated_at": "2026-11-23T08:28:42.370657+00:00",
   "models": {
     "Claude": [
       {
@@ -230,14 +230,6 @@
         "name": "Nvidia",
         "sources": [
           "FREE-LLM-API-Provider"
-        ]
-      },
-      {
-        "key_url": "https://build.nvidia.com/explore/discover",
-        "model": "GPT / OpenAI",
-        "name": "NVIDIA NIM",
-        "sources": [
-          "awesome-free-llm-apis"
         ]
       },
       {
@@ -716,7 +708,6 @@
     "https://aistudio.google.com/app/apikey",
     "https://app.gonkabroker.com/signup",
     "https://app.hyperbolic.xyz/",
-    "https://build.nvidia.com/explore/discover",
     "https://build.nvidia.com/models",
     "https://console.anthropic.com/",
     "https://console.axforge.ai/",
