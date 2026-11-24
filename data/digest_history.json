@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T08:28:42.370657+00:00",
+  "generated_at": "2026-11-24T10:36:12.779452+00:00",
   "models": {
     "Claude": [
       {
@@ -90,6 +90,14 @@
         "name": "Nvidia",
         "sources": [
           "FREE-LLM-API-Provider"
+        ]
+      },
+      {
+        "key_url": "https://www.runcrate.ai/dashboard/api-keys",
+        "model": "DeepSeek",
+        "name": "Runcrate",
+        "sources": [
+          "awesome-free-llm-apis"
         ]
       },
       {
@@ -741,6 +749,7 @@
     "https://www.aionlabs.ai/app/api-keys",
     "https://www.aionlabs.ai/docs/rate-limits",
     "https://www.ovhcloud.com/en/public-cloud/ai-endpoints/catalog",
+    "https://www.runcrate.ai/dashboard/api-keys",
     "https://www.xfyun.cn/doc/spark/HTTP%E8%B0%83%E7%94%A8%E6%96%87%E6%A1%A3.html"
   ]
 }
